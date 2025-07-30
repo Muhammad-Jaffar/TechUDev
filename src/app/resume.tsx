@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export function Resume() {
   return (
-    <section className="relative overflow-hidden px-8 py-24 bg-gray-800">
+    <section id="projects" className="relative overflow-hidden px-8 py-24 bg-gray-800">
       {/* Background Video */}
       <div className="absolute inset-0 z-0 opacity-30">
         <video

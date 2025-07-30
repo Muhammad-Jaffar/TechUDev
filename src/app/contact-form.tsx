@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Typography,
@@ -26,8 +27,48 @@ const stagger = {
 };
 
 const ContactForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(null);
+    setError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      firstName: formData.get("first-name") || "",
+      lastName: formData.get("last-name") || "",
+      email: formData.get("email") || "",
+      interests: formData.getAll("interests"),
+      message: formData.get("message") || "",
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSuccess("Your message has been sent! We'll get back to you soon.");
+        form.reset();
+      } else {
+        setError(result.error || "Something went wrong. Please try again later.");
+      }
+    } catch (err: any) {
+      setError("Failed to send. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <section className="relative overflow-hidden px-8 py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="contact" className="relative overflow-hidden px-8 py-20 bg-gradient-to-b from-gray-50 to-white">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -183,7 +224,18 @@ const ContactForm = () => {
               variants={fadeInUp}
               className="w-full mt-8 md:mt-0 md:px-10 col-span-4 h-full p-8 md:p-12"
             >
-              <form action="#">
+              <form onSubmit={handleSubmit}>
+  {success && (
+    <div className="mb-6 text-green-600 font-semibold text-center bg-green-50 border border-green-200 rounded p-2 animate-fade-in">
+      {success}
+    </div>
+  )}
+  {error && (
+    <div className="mb-6 text-red-600 font-semibold text-center bg-red-50 border border-red-200 rounded p-2 animate-fade-in">
+      {error}
+    </div>
+  )}
+
                 <motion.div 
                   variants={fadeInUp}
                   className="mb-8 grid gap-6 md:grid-cols-2"
@@ -308,13 +360,45 @@ const ContactForm = () => {
                     whileTap={{ scale: 0.98 }}
                     className="w-full md:w-auto"
                   >
-                    <Button 
-                      color="blue" 
-                      className="w-full md:w-auto px-8 py-3 text-base bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 transition-all duration-300 group"
+                    <Button
+                      color="blue"
+                      className="w-full md:w-auto px-8 py-3 text-base bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 transition-all duration-300 group flex items-center justify-center"
                       ripple={false}
+                      type="submit"
+                      disabled={loading}
                     >
-                      Send Message
-                      <ArrowRightIcon className="h-4 w-4 ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1" />
+                      {loading ? (
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="animate-spin h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8v8z"
+                            ></path>
+                          </svg>
+                          Sending...
+                        </span>
+                      ) : (
+                        <>
+                          Send Message
+                          <ArrowRightIcon
+                            className="h-4 w-4 ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
+                          />
+                        </>
+                      )}
                     </Button>
                   </motion.div>
                 </motion.div>

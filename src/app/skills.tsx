@@ -49,7 +49,7 @@ const PROJECTS = [
 
 export function Skills() {
   return (
-    <section className="relative py-20 bg-gradient-to-b from-gray-100 to-gray-200 overflow-hidden group">
+    <section id="about" className="relative py-20 bg-gradient-to-b from-gray-100 to-gray-200 overflow-hidden group">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMzAgMTVjLTguMjkgMC0xNSA2LjcxLTE1IDE1aDMwYzAtOC4yOS02LjcxLTE1LTE1LTE1eiIgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L3N2Zz4=')]"></div>
       

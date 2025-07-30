@@ -16,6 +16,7 @@ import {
   XMarkIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Custom animation styles
 const navItemVariants = {
@@ -35,22 +36,22 @@ const NAV_MENU = [
   {
     name: "Home",
     icon: RectangleStackIcon,
-    href: "#home",
+    href: "/#home",
   },
   {
     name: "About",
     icon: UserCircleIcon,
-    href: "#about",
+    href: "/#about",
   },
   {
     name: "Projects",
     icon: CodeBracketIcon,
-    href: "#projects",
+    href: "/#projects",
   },
   {
     name: "Contact",
     icon: CommandLineIcon,
-    href: "#contact",
+    href: "/#contact",
   },
 ];
 
@@ -91,7 +92,7 @@ function NavItem({ children, href, index = 0 }: NavItemProps) {
   );
 }
 
-import { motion, AnimatePresence } from "framer-motion";
+
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -154,25 +155,19 @@ export function Navbar() {
             ))}
           </ul>
           <div className="hidden items-center gap-4 lg:flex">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                variant="outlined" 
-                className="text-white border-white/30 hover:bg-white/10 transition-colors duration-300"
-              >
-                Sign In
-              </Button>
-            </motion.div>
             <motion.div 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
               className="relative"
             >
-              <Button 
-                className="bg-blue-600 hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2"
-              >
-                <CodeBracketIcon className="h-5 w-5" />
-                Get Started
-              </Button>
+              <Link href="#home">
+                <Button 
+                  className="bg-blue-600 hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2"
+                >
+                  <CodeBracketIcon className="h-5 w-5" />
+                  Get Started
+                </Button>
+              </Link>
             </motion.div>
           </div>
           <div className="lg:hidden">
