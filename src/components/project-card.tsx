@@ -1,11 +1,6 @@
 import Image from "next/image";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+import { useState } from "react";
+import { Typography } from "@material-tailwind/react";
 
 interface ProjectCardProps {
   img: string;
@@ -29,32 +24,66 @@ function getSkillUrl(title: string): string {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ img, title, desc }) => {
+  const [imageError, setImageError] = useState(false);
+  const imagePath = imageError ? "/image/image-placeholder.svg" : img;
+
+  // Handle image loading errors
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageError(true);
+    }
+  };
+
   return (
-    <Card color="transparent" shadow={false}>
-      <CardHeader floated={false} className="mx-0 mt-0 mb-6 h-48">
+    <div className="h-full flex flex-col rounded-lg shadow-md overflow-hidden bg-white">
+      <div className="relative h-48 w-full flex-shrink-0">
         <Image
-          src={img}
+          src={imagePath}
           alt={title}
-          width={768}
-          height={768}
-          className="h-full w-full object-cover"
+          fill
+          style={{ objectFit: 'cover' }}
+          onError={handleImageError}
+          className="rounded-t-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
         />
-      </CardHeader>
-      <CardBody className="p-0">
+      </div>
+      <div className="flex flex-col flex-grow p-6">
         <a
           href={getSkillUrl(title)}
-          className="text-blue-gray-900 transition-colors hover:text-gray-800"
+          className="text-blue-gray-900 hover:text-gray-800 transition-colors block flex-grow"
         >
-          <Typography variant="h5" className="mb-2">
+          <Typography variant="h5" className="mb-2 font-semibold">
             {title}
           </Typography>
         </a>
         <Typography className="mb-6 font-normal !text-gray-500">
           {desc}
         </Typography>
-
-      </CardBody>
-    </Card>
+        <a href={getSkillUrl(title)} className="inline-block mt-auto">
+          <button
+            className="flex items-center gap-2 text-blue-gray-900 font-medium"
+            type="button"
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </button>
+        </a>
+      </div>
+    </div>
   );
 };
 

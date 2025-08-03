@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Image Placeholder</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F3F4F6" offset="0%"></stop>
+            <stop stop-color="#E5E7EB" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <rect fill="#F3F4F6" x="0" y="0" width="800" height="600"></rect>
+    <rect fill="url(#linearGradient-1)" x="0" y="0" width="800" height="600"></rect>
+    <text font-family="Arial, sans-serif" font-size="24" font-weight="normal" fill="#9CA3AF" x="50%" y="50%" text-anchor="middle" dy=".3em">
+        {title}
+    </text>
+</svg>

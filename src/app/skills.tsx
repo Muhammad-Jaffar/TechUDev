@@ -6,42 +6,42 @@ import { getImagePrefix } from "../../utils/utils";
 
 const PROJECTS = [
   {
-    img: `${getImagePrefix()}image/blog-1.svg`,
+    img: "/image/blog-1.svg",
     title: "Website Development",
     desc: "Website designed to help users discover and explore local restaurants and cuisines and many more.",
   },
   {
-    img: `${getImagePrefix()}image/blog2.svg`,
+    img: "/image/blog2.svg",
     title: "Landing Page Development",
     desc: "Promotional landing page for a fitness website Summer Campaign. Form development included.",
   },
   {
-    img: `${getImagePrefix()}image/digital-marketing.png`,
+    img: "/image/digital-marketing.png",
     title: "Digital Marketing",
     desc: "Comprehensive digital marketing strategies to boost your online presence and drive targeted traffic to your business.",
   },
   {
-    img: `${getImagePrefix()}image/SEO.png`,
+    img: "/image/SEO.png",
     title: "SEO Services",
     desc: "Search Engine Optimization services to improve your website's visibility and ranking on search engines.",
   },
   {
-    img: `${getImagePrefix()}image/Wordpress.jpg`,
+    img: "/image/Wordpress.jpg",
     title: "WordPress Development",
     desc: "Custom WordPress websites and themes tailored to your specific business needs and brand identity.",
   },
   {
-    img: `${getImagePrefix()}image/pexels-googledeepmind-18069696.jpg`,
+    img: "/image/pexels-googledeepmind-18069696.jpg",
     title: "AI Automation",
     desc: "Implementing AI-powered automation solutions to streamline your business processes and increase efficiency.",
   },
   {
-    img: `${getImagePrefix()}image/blog3.svg`,
+    img: "/image/blog3.svg",
     title: "Mobile App Development",
     desc: "Mobile app designed to help users discover and explore local restaurants and cuisines.",
   },
   {
-    img: `${getImagePrefix()}image/blog4.svg`,
+    img: "/image/blog4.svg",
     title: "E-commerce development",
     desc: "Ecommerce website offering access to the latest and greatest gadgets and accessories.",
   },
