@@ -7,11 +7,10 @@
   "homepage": "https://github.com/themewagon/Next.js-Tailwind-CSS-Portfolio-Template",
   "scripts": {
     "dev": "next dev",
-    "build": "set NEXT_TELEMETRY_DISABLED=1 && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "netlify deploy --prod --dir=out"
+    "export": "next build && next export"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

@@ -1,25 +1,18 @@
-const isProd = process.env.NODE_ENV === "production";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true,
+    unoptimized: false, // Let Vercel optimize images
     domains: ['vercel.com'],
   },
-  // Remove experimental features that might cause issues
-  // These features are now stable in newer Next.js versions
-  compiler: {
-    // Enable styled-components support if needed
-    // styledComponents: true,
+  // Remove output: 'export' as Vercel handles this automatically
+  // Remove assetPrefix as it's not needed for Vercel
+  // Enable React 18 features
+  experimental: {
+    // Add any experimental features you need
   },
-  // Enable static exports for Netlify
-  output: 'export',
-  // Add basePath if your site is not served from the root
-  // basePath: isProd ? '/your-repo-name' : '',
-  // Add assetPrefix for static exports
-  assetPrefix: isProd ? '' : '',
-  // Disable React 18 concurrent features as they're now stable
-  // and don't need explicit configuration
+  // Enable static HTML export for better compatibility
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
