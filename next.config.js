@@ -1,12 +1,20 @@
 const isProd = process.env.NODE_ENV === "production";
- 
+
 const nextConfig = {
-  basePath: isProd ? "/Next.js-Tailwind-CSS-Portfolio-Template" : "",
-  assetPrefix: isProd ? "/Next.js-Tailwind-CSS-Portfolio-Template/" : "",
-  // Removed output: "export" to allow dynamic API routes
+  reactStrictMode: true,
   images: {
     unoptimized: true,
+    // For Vercel deployment
+    domains: ['vercel.com'],
+  },
+  // Remove output: 'export' for Vercel deployment
+  // Vercel will handle the build output automatically
+  // Remove trailingSlash as it's not needed for Vercel
+  // Enable React 18 concurrent features
+  experimental: {
+    reactRoot: true,
+    concurrentFeatures: true,
   },
 };
- 
+
 module.exports = nextConfig;
